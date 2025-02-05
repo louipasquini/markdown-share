@@ -204,6 +204,17 @@ function App() {
     URL.revokeObjectURL(url);
   };
 
+  window.addEventListener("resize", () => {
+    const app = document.querySelector(".app");
+    app.style.height = window.innerHeight + "px";
+  });
+  
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest("textarea")) {
+      window.dispatchEvent(new Event("resize"));
+    }
+  });
+
   return (
     <div style={styles.app} className='app'>
       <style>{globalStyles}</style>

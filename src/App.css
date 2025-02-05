@@ -1,5 +1,5 @@
 .app {
-  height: 100dvh;
+  height: 100svh;
   padding-bottom: 0;
   margin-bottom: 0;
   display: flex;
@@ -70,19 +70,22 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100%;
+    height: auto;
+    min-height: 100%;
   }
 
   .editor {
     box-sizing: border-box;
-    height: 100%;
+    height: auto;
+    min-height: 100%;
     width: 100%;
     width: calc(100% - 40px); /* Compensa margens de 20px em cada lado */
     margin: 0 20px; 
   }
   .text {
     box-sizing: border-box;
-    height: 100%;
+    height: auto;
+    min-height: 100%;
     width: 100%;
     margin: 0 10px;
     width: calc(100% - 40px); /* Compensa margens de 20px em cada lado */

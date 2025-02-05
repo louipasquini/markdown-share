@@ -1,0 +1,81 @@
+.topbar {
+  width: 100%;
+  height: 60px;
+  border-radius: 10px;
+  outline: solid 1px;
+  box-shadow: 0 4px 4px #00000025;
+  display: flex;
+}
+
+.topbar-left {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.topbar-left > h1 {
+  font-family: "Outfit";
+  margin: 10px;
+  margin-left: 20px;
+}
+
+.topbar-right {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.topbar-right > button {
+  height: 40px;
+  width: 200px;
+  font-family: "Outfit";
+  outline: solid 1px;
+  margin-right: 10px;
+  margin-left: 0;
+  border: none;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  font-size: 14pt;
+  box-shadow: 0 4px 4px #00000015;
+}
+
+
+.topbar-right > button:hover {
+  transform: scale(1.06);
+}
+
+.theme-change {
+  height: 40px;
+  width: 40px;
+  outline: solid 1px;
+  border-radius: 5px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 4px #00000015;
+}
+
+.theme-change:hover {
+  transform: scale(1.08);
+}
+
+.sun {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+}
+
+.moon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+}

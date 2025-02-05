@@ -61,6 +61,10 @@ function App() {
   };
 
   const globalStyles = `
+    body {
+      background-color: ${isDark ? '#1e1e1e' : '#f8f8f8'} !important;
+    }
+
     .markdown-body {
       border: ${isDark ? '#1e1e1e' : '#f8f8f8'} !important;
     }

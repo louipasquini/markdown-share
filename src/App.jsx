@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Topbar from './components/Topbar/Topbar.jsx'
+import ShareBox from './components/ShareBox/ShareBox.jsx'
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 import html2canvas from "html2canvas";
@@ -9,9 +10,102 @@ import "highlight.js/styles/github.css";
 import "github-markdown-css/github-markdown-light.css"
 import './App.css'
 
+let readable = 0
+
 function App() {
   const [textoFormatado, setTextoFormatado] = useState('')
   const [isDark, setIsDark] = useState(false);
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const markdownId = urlParams.get('id');
+  const editMode = urlParams.get('editmode');
+
+  if (!markdownId && !editMode) {
+    window.location.href = `${window.location.origin}/?editmode=on`
+  }
+
+  const [link,setLink] = useState(markdownId ? `${window.location.origin}/?id=${markdownId}` : '')
+
+  const activeMarkdownSet = (data) => {
+    setTextoFormatado(data)
+  }
+
+  if (editMode && editMode=='on') {
+    if (markdownId && readable<=1) {
+      fetch(`http://127.0.0.1:8000/markdowns/${markdownId}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Erro: ${response.status}`)
+        }
+        return response.json();
+      })
+      .then(data => {
+        activeMarkdownSet(data.content)
+        readable+=1
+      })
+      .catch(error => {
+        console.error('Erro na requisição:', error);
+      })
+    }
+  } else {
+    if (markdownId && readable<=1) {
+      fetch(`http://127.0.0.1:8000/markdowns/${markdownId}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Erro: ${response.status}`)
+        }
+        return response.json();
+      })
+      .then(data => {
+        activeMarkdownSet(data.content)
+      })
+      .catch(error => {
+        console.error('Erro na requisição:', error);
+      })
+    }
+  }
+
+  async function enviarMarkdown() {
+    const responseVerificacao = await fetch(`http://127.0.0.1:8000/markdowns/${markdownId}`);
+    try {
+
+      if (responseVerificacao.ok) {
+        const responseSubstituicao = await fetch(`http://127.0.0.1:8000/markdowns/${markdownId}`, {
+          method: 'PUT', 
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            content: textoFormatado
+          }),
+        });
+  
+        if (!responseSubstituicao.ok) {
+          throw new Error(`Erro ao substituir o arquivo: ${responseSubstituicao.status}`);
+        }
+  
+        const dadosSubstituicao = await responseSubstituicao.json();
+        console.log('Arquivo substituído com sucesso:', dadosSubstituicao);
+      } else {
+        const response = await fetch('http://127.0.0.1:8000/markdowns/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            content: textoFormatado
+          })
+        })
+        if (!response.ok) {
+          throw new Error(`Erro: ${response.status}`);
+        }
+        const data = await response.json();
+      }
+    } catch (error) {
+      console.error('Erro na requisição:', error)
+    }
+
+  }
 
   const styles = {
     app: {
@@ -21,6 +115,7 @@ function App() {
       backgroundColor: isDark ? '#1e1e1e' : '#f8f8f8',
       color: isDark ? '#f8f8f8' : '#1e1e1e',
       outlineColor: isDark ? '#f8f8f8' : '#1e1e1e',
+      display: editMode == 'on' ? 'show' : 'none'
     },
     preview: {
       backgroundColor: isDark ? '#1e1e1e' : '#f8f8f8',
@@ -29,11 +124,13 @@ function App() {
       borderColor: isDark ? '#f8f8f8' : '#1e1e1e',
       headerBg: isDark ? '#f8f8f8' : '#1e1e1e',
       rowBg: isDark ? '#f8f8f8' : '#1e1e1e',
+      marginTop: editMode == 'on' ? '' : '20px'
     },
     topbar: {
       backgroundColor: isDark ? '#1e1e1e' : '#f8f8f8',
       color: isDark ? '#f8f8f8' : '#1e1e1e',
       outlineColor: isDark ? '#f8f8f8' : '#1e1e1e',
+      display: editMode == 'on' ? 'show' : 'none'
     },
     share: {
       backgroundColor: isDark ? '#f8f8f8' : '#1e1e1e',
@@ -218,8 +315,9 @@ function App() {
   return (
     <div style={styles.app} className='app'>
       <style>{globalStyles}</style>
-      <Topbar exportDivToPDF={exportDivToPDF} exportMarkdownToHTML={exportMarkdownToHTML} exportAsMd={exportAsMd} styles={styles} isDark={isDark} setIsDark={setIsDark}/>
+      <Topbar enviarMarkdown={enviarMarkdown} exportDivToPDF={exportDivToPDF} exportMarkdownToHTML={exportMarkdownToHTML} exportAsMd={exportAsMd} styles={styles} isDark={isDark} setIsDark={setIsDark}/>
       <div className='container'>
+        <ShareBox link={link} />
         <div style={styles.editor} className='editor'>
           <textarea style={styles.textarea} value={textoFormatado} onChange={(e) => setTextoFormatado(e.target.value)}></textarea>
         </div>

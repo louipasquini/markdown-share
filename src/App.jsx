@@ -33,7 +33,7 @@ function App() {
 
   if (editMode && editMode=='on') {
     if (markdownId && readable<=1) {
-      fetch(`http://127.0.0.1:8000/markdowns/${markdownId}`)
+      fetch(`https://58c816e8-2450-4d02-bbfa-3d7695709a1c-00-1aol4ww8mt1yb.picard.replit.dev/markdowns/${markdownId}`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`Erro: ${response.status}`)
@@ -50,7 +50,7 @@ function App() {
     }
   } else {
     if (markdownId && readable<=1) {
-      fetch(`http://127.0.0.1:8000/markdowns/${markdownId}`)
+      fetch(`https://58c816e8-2450-4d02-bbfa-3d7695709a1c-00-1aol4ww8mt1yb.picard.replit.dev/markdowns/${markdownId}`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`Erro: ${response.status}`)
@@ -67,11 +67,11 @@ function App() {
   }
 
   async function enviarMarkdown() {
-    const responseVerificacao = await fetch(`http://127.0.0.1:8000/markdowns/${markdownId}`);
+    const responseVerificacao = await fetch(`https://58c816e8-2450-4d02-bbfa-3d7695709a1c-00-1aol4ww8mt1yb.picard.replit.dev/markdowns/${markdownId}`);
     try {
 
       if (responseVerificacao.ok) {
-        const responseSubstituicao = await fetch(`http://127.0.0.1:8000/markdowns/${markdownId}`, {
+        const responseSubstituicao = await fetch(`https://58c816e8-2450-4d02-bbfa-3d7695709a1c-00-1aol4ww8mt1yb.picard.replit.dev/markdowns/${markdownId}`, {
           method: 'PUT', 
           headers: {
             'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ function App() {
   
         const dadosSubstituicao = await responseSubstituicao.json();
       } else {
-        const response = await fetch('http://127.0.0.1:8000/markdowns/', {
+        const response = await fetch('https://58c816e8-2450-4d02-bbfa-3d7695709a1c-00-1aol4ww8mt1yb.picard.replit.dev/markdowns/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

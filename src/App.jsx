@@ -15,6 +15,7 @@ let readable = 0
 function App() {
   const [textoFormatado, setTextoFormatado] = useState('')
   const [isDark, setIsDark] = useState(false);
+  const [showShareBox,setShowShareBox] = useState('none')
 
   const urlParams = new URLSearchParams(window.location.search);
   const markdownId = urlParams.get('id');
@@ -100,6 +101,10 @@ function App() {
           throw new Error(`Erro: ${response.status}`);
         }
         const data = await response.json();
+        setLink(`${window.location.origin}/?id=${data.id}`)
+        const url = new URL(window.location.href)
+        url.searchParams.set('id',data.id)
+        history.pushState({}, '', url);
       }
     } catch (error) {
       console.error('Erro na requisição:', error)
@@ -315,9 +320,9 @@ function App() {
   return (
     <div style={styles.app} className='app'>
       <style>{globalStyles}</style>
-      <Topbar enviarMarkdown={enviarMarkdown} exportDivToPDF={exportDivToPDF} exportMarkdownToHTML={exportMarkdownToHTML} exportAsMd={exportAsMd} styles={styles} isDark={isDark} setIsDark={setIsDark}/>
+      <Topbar showShareBox={showShareBox} setShowShareBox={setShowShareBox} enviarMarkdown={enviarMarkdown} exportDivToPDF={exportDivToPDF} exportMarkdownToHTML={exportMarkdownToHTML} exportAsMd={exportAsMd} styles={styles} isDark={isDark} setIsDark={setIsDark}/>
       <div className='container'>
-        <ShareBox link={link} />
+        <ShareBox showShareBox={showShareBox} setShowShareBox={setShowShareBox} link={link} />
         <div style={styles.editor} className='editor'>
           <textarea style={styles.textarea} value={textoFormatado} onChange={(e) => setTextoFormatado(e.target.value)}></textarea>
         </div>

@@ -3,9 +3,77 @@
   height: fit-content;
   background-color: #f8f8f8;
   position: absolute;
-  padding: 20px;
+  padding: 20px 40px;
   border-radius: 12px;
   outline: solid 1px #1e1e1e;
   box-shadow: 0 4px 4px #00000025;
-  display: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Outfit";
+  align-self: center;
+}
+
+.share-box > h2 {
+  margin: 20px 0;
+}
+
+.read-only {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.read-only > h5 {
+  font-family: "Outfit";
+  font-weight: 300;
+  margin: 5px 0;
+}
+
+.edit-mode {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.link-box {
+  width: 100%;
+  font-family: "Outfit";
+  margin: 0;
+  font-size: 14pt;
+  border: none;
+  outline: solid 1px #1e1e1e;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  box-shadow: 0 2px 2px #00000025;
+}
+
+.edit-mode > h5 {
+  font-family: "Outfit";
+  font-weight: 300;
+  margin: 5px 0;
+}
+
+.copy-box {
+  display: flex;
+}
+
+.copy-btn {
+  margin: 0 5px;
+  box-shadow: 0 2px 2px #00000025;
+  
+}
+
+.close-btn {
+  position: absolute;
+  align-self: flex-end;
+  margin-right: -20px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: "Outfit";
 }

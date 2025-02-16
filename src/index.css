@@ -3,3 +3,13 @@ body {
   width: 100%;
   height: 100dvh;
 }
+
+::-moz-selection { /* Code for Firefox */
+  color: #f8f8f8;
+  background: #585858;
+}
+
+::selection {
+  color: #f8f8f8;
+  background: #585858;
+}

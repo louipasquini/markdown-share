@@ -1,8 +1,6 @@
 import "./Topbar.css"
 
-const Topbar = ({enviarMarkdown,exportDivToPDF,exportMarkdownToHTML,exportAsMd,styles,isDark,setIsDark}) => {
-
-  
+const Topbar = ({showShareBox,setShowShareBox,enviarMarkdown,exportDivToPDF,exportMarkdownToHTML,exportAsMd,styles,isDark,setIsDark}) => {
 
   return (<div style={styles.topbar} className="topbar">
     <div className="topbar-left">
@@ -19,7 +17,11 @@ const Topbar = ({enviarMarkdown,exportDivToPDF,exportMarkdownToHTML,exportAsMd,s
       <button onClick={exportAsMd} style={styles.topbar}>Exportar como MD</button>
       <button onClick={exportMarkdownToHTML} style={styles.topbar}>Exportar como HTML</button>
       <button onClick={exportDivToPDF} style={styles.topbar}>Exportar como PDF</button>
-      <button onClick={enviarMarkdown} style={styles.share}>Compartilhar</button>
+      <button onClick={() => {
+        enviarMarkdown()
+        setShowShareBox('flex')
+        console.log(showShareBox)
+        }} style={styles.share}>Compartilhar</button>
     </div>
     </div>
     )

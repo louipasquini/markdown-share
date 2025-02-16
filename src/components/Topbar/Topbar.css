@@ -19,6 +19,7 @@
   font-family: "Outfit";
   margin: 10px;
   margin-left: 20px;
+  cursor: pointer;
 }
 
 .topbar-right {

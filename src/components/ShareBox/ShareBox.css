@@ -44,7 +44,7 @@
   width: 100%;
   font-family: "Outfit";
   margin: 0;
-  font-size: 14pt;
+  font-size: 15pt;
   border: none;
   outline: solid 1px #1e1e1e;
   border-radius: 4px;
@@ -63,9 +63,19 @@
 }
 
 .copy-btn {
+  width: 40px;
+  height: 35px;
   margin: 0 5px;
   box-shadow: 0 2px 2px #00000025;
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f8f8;
+  border: none;
+  outline: solid 1px #1e1e1e;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 
 .close-btn {
@@ -76,4 +86,20 @@
   border: none;
   cursor: pointer;
   font-family: "Outfit";
+  font-weight: 800;
+}
+
+.share-ico {
+  width: 20px;
+  height: 20px;
+  fill: #1e1e1e;
+  transition: all 0.2s ease-in-out;
+}
+
+.copy-btn:hover {
+  background-color: #1e1e1e;
+}
+
+.copy-btn:hover > svg {
+  fill: #f8f8f8;
 }

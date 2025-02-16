@@ -86,7 +86,6 @@ function App() {
         }
   
         const dadosSubstituicao = await responseSubstituicao.json();
-        console.log('Arquivo substituído com sucesso:', dadosSubstituicao);
       } else {
         const response = await fetch('http://127.0.0.1:8000/markdowns/', {
           method: 'POST',

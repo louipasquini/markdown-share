@@ -13,7 +13,7 @@ import './App.css'
 let readable = 0
 
 function App() {
-  const [textoFormatado, setTextoFormatado] = useState('')
+  const [textoFormatado, setTextoFormatado] = useState('# Isso é Markdown\n\nVocê pode formatar textos de forma rápida com alguns comandos.\n\n## Quando mais # menor fica o seu título\n### E pode ficar menor\n#### menor\n##### e menor\n###### e menor\n\nTambém podemos formar tabelas:\n\n| É simples | Assim |\n| --- | --- |\n| Muito | simples |\n\n[Você pode colocar um link em um texto dessa forma](https://google.com/)\n\n![Ou até colocar imagens](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAh6FrlNyJDPdD-g8qo-_zbZ6BdmUt0uj76g&s)\n\n\n```\nconsole.log("Você pode criar blocos de código também")\n```')
   const [isDark, setIsDark] = useState(false);
   const [showShareBox,setShowShareBox] = useState('none')
 
